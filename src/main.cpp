@@ -6,11 +6,6 @@
 
 #include "bme280/bme280.h"
 
-// ========== TEMPORARY OVERRIDES UNTIL SOLDER IS COMPLETE ==========
-#define PICO_DEFAULT_I2C_SDA_PIN 12
-#define PICO_DEFAULT_I2C_SCL_PIN 13
-// ========== END TEMPORARY OVERRIDES UNTIL SOLDER IS COMPLETE ==========
-
 int8_t user_i2c_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t length, void *intf_ptr);
 int8_t user_i2c_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
 void user_delay_us(uint32_t period, void *intf_ptr);
@@ -54,7 +49,8 @@ int main()
 
     if(BME280_OK != rslt)
     {
-        panic("bme280_init failed with %d\n", rslt);
+        printf("bme280_init failed with %02d\n", rslt);
+        panic("Program Failed...");
     }
 
     stream_sensor_data_normal_mode(&dev);
