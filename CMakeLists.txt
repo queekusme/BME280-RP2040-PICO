@@ -20,7 +20,9 @@ file(GLOB_RECURSE SOURCES
 
 add_executable(${PROJECT_NAME}
     "src/main.cpp"
-    "src/bme280/bme280.h" "src/bme280/bme280.c")
+    "src/bme280/bme280.h" "src/bme280/bme280.c"
+    "src/i2c_bus.hpp" "src/i2c_bus.cpp"
+    "src/bme280_device.hpp" "src/bme280_device.cpp")
 
 # Create map/bin/hex/uf2 files
 pico_add_extra_outputs(${PROJECT_NAME})
