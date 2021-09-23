@@ -5,13 +5,13 @@ bme280_device::bme280_device(i2c_bus bus, int8_t address): bus(bus), address(add
     // Constructor
     int8_t rslt = BME280_OK;
 
-    this->dev.intf_ptr = new i2c_intf_ptr{.i2c = bus.getI2CChannel(), .address = BME280_I2C_ADDR_PRIM};
+    this->dev.intf_ptr = new i2c_intf_ptr{.i2c = bus.getI2CChannel(), .address = address};
     this->dev.intf = BME280_I2C_INTF;
     this->dev.read = bme280_device::user_i2c_read;
     this->dev.write = bme280_device::user_i2c_write;
     this->dev.delay_us = bme280_device::user_delay_us;
 
-    rslt = bme280_init(&dev);
+    rslt = bme280_init(&(this->dev));
 
     if(BME280_OK != rslt)
     {
@@ -49,7 +49,6 @@ int8_t bme280_device::read(bme280_data *comp_data)
     this->dev.delay_us(70, this->dev.intf_ptr);
 	rslt = bme280_get_sensor_data(BME280_ALL, comp_data, &(this->dev));
     printf("[INTERNAL] %0.2f*C, %0.2fPa, %0.2f%%\r\n",comp_data->temperature, comp_data->pressure, comp_data->humidity);
-
 
     return rslt;
 }
