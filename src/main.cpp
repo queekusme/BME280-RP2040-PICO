@@ -33,7 +33,7 @@ int main()
 
     while(true)
     {
-        bme280_data comp_data;
+        struct bme280_data comp_data;
         printf("pre-read\n");
         int8_t rslt = bme280.read(&comp_data);
         printf("post-read\n");

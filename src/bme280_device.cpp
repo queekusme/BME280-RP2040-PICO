@@ -72,6 +72,8 @@ BME280_INTF_RET_TYPE bme280_device::user_i2c_read(uint8_t reg_addr, uint8_t *reg
 {
     i2c_intf_ptr* i2c = (i2c_intf_ptr *)intf_ptr;
 
+    printf("* * Reading From %#04x, %#04x\n", i2c->address, reg_addr);
+
     int result = i2c_write_blocking(i2c->i2c, i2c->address, &reg_addr, 1, true);
     result = i2c_read_blocking(i2c->i2c, i2c->address, reg_data, length, false);
 
